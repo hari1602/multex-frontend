@@ -22,7 +22,7 @@ export default function Project({ params }: { params: { id: string } }) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:3000/repos", {
+    const response = await fetch("https://backend.blvhn.online/repos", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -55,7 +55,7 @@ export default function Project({ params }: { params: { id: string } }) {
   useEffect(() => {
     const response = async () => {
       const response = await fetch(
-        `http://localhost:3000/projects/${params.id}`
+        `https://backend.blvhn.online/projects/${params.id}`
       );
       const result = await response.json();
       setRepos(result.repos);
@@ -201,7 +201,7 @@ export default function Project({ params }: { params: { id: string } }) {
             htmlFor="message"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Environment variable key for database	
+            Environment variable key for database
           </label>
           <textarea
             id="message"

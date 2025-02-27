@@ -43,7 +43,7 @@ export default function Dashboard({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:3000/clients/${params.id}`
+        `https://backend.blvhn.online/clients/${params.id}`
       );
       const result = await response.json();
       setProjects(result.projects);

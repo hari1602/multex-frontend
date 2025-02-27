@@ -18,7 +18,7 @@ export default function Client({ params }: { params: { id: string } }) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:3000/projects", {
+    const response = await fetch("https://backend.blvhn.online/projects", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -46,7 +46,7 @@ export default function Client({ params }: { params: { id: string } }) {
   useEffect(() => {
     const response = async () => {
       const response = await fetch(
-        `http://localhost:3000/clients/${params.id}`
+        `https://backend.blvhn.online/clients/${params.id}`
       );
       const result = await response.json();
       setProjects(result.projects);
@@ -157,6 +157,12 @@ export default function Client({ params }: { params: { id: string } }) {
               Domain
             </th>
             <th scope="col" className="px-6 py-3">
+              SIGN UP PAGE FOR TENANTS (USE IT FOR MARKETING)
+            </th>
+            <th scope="col" className="px-6 py-3">
+              PREVIEW LINK
+            </th>
+            <th scope="col" className="px-6 py-3">
               Action
             </th>
           </tr>
@@ -174,13 +180,25 @@ export default function Client({ params }: { params: { id: string } }) {
                 >
                   {project.name}
                 </th>
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {project.domain}
+                </td>
                 <td className="px-6 py-4">
                   <Link
                     target="_blank"
-                    href={`https://${project.domain}`}
+                    href={`https://signup.blvhn.online/${project.id}`}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
-                    {project.domain}
+                    signup.blvhn.online/{project.id}
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link
+                    target="_blank"
+                    href={`https://preview.${project.domain}`}
+                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >
+                    preview.{project.domain}
                   </Link>
                 </td>
                 <td className="px-6 py-4">

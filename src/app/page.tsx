@@ -10,16 +10,19 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:3000/clients/signin", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: clientEmail.current?.value,
-      }),
-    });
+    const response = await fetch(
+      "https://backend.blvhn.online/clients/signin",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: clientEmail.current?.value,
+        }),
+      }
+    );
 
     const data = await response.json();
 

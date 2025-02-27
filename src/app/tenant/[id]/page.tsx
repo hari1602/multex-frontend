@@ -8,7 +8,7 @@ export default function Tenant({ params }: { params: { id: string } }) {
   useEffect(() => {
     const response = async () => {
       const response = await fetch(
-        `http://localhost:3000/tenants/proj/${params.id}`
+        `https://backend.blvhn.online/tenants/proj/${params.id}`
       );
       const result = await response.json();
       setTenants(result);
