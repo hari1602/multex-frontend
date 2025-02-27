@@ -33,7 +33,7 @@ export default function Client({ params }: { params: { id: string } }) {
     });
 
     const data = await response.json();
-    console.log(data)
+    console.log(data);
 
     if (data.status === 404) {
       alert(data.message);
@@ -170,9 +170,6 @@ export default function Client({ params }: { params: { id: string } }) {
               Domain
             </th>
             <th scope="col" className="px-6 py-3">
-              SIGN UP PAGE FOR TENANTS (USE IT FOR MARKETING)
-            </th>
-            <th scope="col" className="px-6 py-3">
               PREVIEW LINK
             </th>
             <th scope="col" className="px-6 py-3">
@@ -202,15 +199,6 @@ export default function Client({ params }: { params: { id: string } }) {
                 <td className="px-6 py-4">
                   <Link
                     target="_blank"
-                    href={`https://signup.blvhn.online/${project.id}`}
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    signup.blvhn.online/{project.id}
-                  </Link>
-                </td>
-                <td className="px-6 py-4">
-                  <Link
-                    target="_blank"
                     href={`https://preview.${project.domain}`}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
@@ -235,13 +223,19 @@ export default function Client({ params }: { params: { id: string } }) {
                 <td className="flex items-center px-6 py-4">
                   <Link
                     target="_blank"
-                    href={`http://localhost:3003/${project.id}`}
+                    href={`https://signup.blvhn.online/${project.id}`}
                     className=" font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
-                    <span className="mr-4">signup.blvd.online/{project.id}</span>
+                    <span className="mr-4">
+                      signup.blvhn.online/{project.id}
+                    </span>
                   </Link>
                   <button
-                    onClick={async () => await handleCopy(`http://localhost:3003/${project.id}`)}
+                    onClick={async () =>
+                      await handleCopy(
+                        `https://signup.blvhn.online/${project.id}`
+                      )
+                    }
                     className="
                       flex items-center
                       px-2 py-2
@@ -255,7 +249,6 @@ export default function Client({ params }: { params: { id: string } }) {
                     "
                   >
                     <ClipboardDocumentIcon className="w-5 h-5 mx-2" />
-
                   </button>
                   {copied && (
                     <span className="ml-4 text-green-600">Copied!</span>
