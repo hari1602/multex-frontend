@@ -201,7 +201,7 @@ export default function Project({ params }: { params: { id: string } }) {
             htmlFor="message"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Environment Variables
+            Environment variable key for database	
           </label>
           <textarea
             id="message"
