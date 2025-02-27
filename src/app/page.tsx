@@ -27,7 +27,7 @@ export default function Login() {
       alert(data.message);
     } else {
       alert(`Welcome ${data.name}!`);
-      router.push(`/client/${data.id}`);
+      router.push(`/dashboard/${data.id}`);
     }
   };
 
