@@ -3,10 +3,10 @@ import Modal from "@/components/modal";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 
 export default function Client({ params }: { params: { id: string } }) {
   const router = useRouter();
-
   const name = useRef<HTMLInputElement | null>(null);
   const description = useRef<HTMLInputElement | null>(null);
   const domain = useRef<HTMLInputElement | null>(null);
@@ -33,6 +33,7 @@ export default function Client({ params }: { params: { id: string } }) {
     });
 
     const data = await response.json();
+    console.log(data)
 
     if (data.status === 404) {
       alert(data.message);
@@ -40,6 +41,18 @@ export default function Client({ params }: { params: { id: string } }) {
       alert(`Created ${data.name}!`);
       setIsOpen(false);
       setProjects((prev) => [...prev, data]);
+    }
+  };
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (textToCopy: string) => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
     }
   };
 
@@ -165,6 +178,9 @@ export default function Client({ params }: { params: { id: string } }) {
             <th scope="col" className="px-6 py-3">
               Action
             </th>
+            <th scope="col" className="px-6 py-3">
+              Tenant Invitation Link
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -215,6 +231,35 @@ export default function Client({ params }: { params: { id: string } }) {
                   >
                     View Tenants
                   </Link>
+                </td>
+                <td className="flex items-center px-6 py-4">
+                  <Link
+                    target="_blank"
+                    href={`http://localhost:3003/${project.id}`}
+                    className=" font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >
+                    <span className="mr-4">signup.blvd.online/{project.id}</span>
+                  </Link>
+                  <button
+                    onClick={async () => await handleCopy(`http://localhost:3003/${project.id}`)}
+                    className="
+                      flex items-center
+                      px-2 py-2
+                      bg-blue-600
+                      text-white
+                      rounded
+                      hover:bg-blue-700
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-blue-500
+                    "
+                  >
+                    <ClipboardDocumentIcon className="w-5 h-5 mx-2" />
+
+                  </button>
+                  {copied && (
+                    <span className="ml-4 text-green-600">Copied!</span>
+                  )}
                 </td>
               </tr>
             )
